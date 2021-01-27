@@ -1,51 +1,54 @@
-window.addEventListener('DOMContentLoaded', () => {
-      //Tabs
-    const tabs = document.querySelectorAll('.tabheader__item'),
-          tabsContent = document.querySelectorAll('.tabcontent'),
-          tabsParent = document.querySelector('.tabheader__items');
-          
+window.addEventListener('DOMContentLoaded', function() {
 
+    // Tabs
+    
+	let tabs = document.querySelectorAll('.tabheader__item'),
+		tabsContent = document.querySelectorAll('.tabcontent'),
+		tabsParent = document.querySelector('.tabheader__items');
 
-          function hideTabContent () {
-              tabsContent.forEach(item => {
-                item.style.display = 'none';
-              });
+	function hideTabContent() {
+        
+        tabsContent.forEach(item => {
+            item.classList.add('hide');
+            item.classList.remove('show', 'fade');
+        });
 
-              tabs.forEach( item => {
-                item.classList.remove('tabheader__item_active');
-              });
-          }
+        tabs.forEach(item => {
+            item.classList.remove('tabheader__item_active');
+        });
+	}
 
-          function showTabContent (i = 0) {
-              tabsContent[i].style.display = 'block';
-              tabs[i].classList.add('tabheader__item_active');
-          }
+	function showTabContent(i = 0) {
+        tabsContent[i].classList.add('show', 'fade');
+        tabsContent[i].classList.remove('hide');
+        tabs[i].classList.add('tabheader__item_active');
+    }
+    
+    hideTabContent();
+    showTabContent();
 
-          hideTabContent();
-          showTabContent();
-
-    tabsParent.addEventListener('click', (event) => {
-        const target = event.target;
-
-        if (target && target.classList.contains('tabheader__item')) {
+	tabsParent.addEventListener('click', function(event) {
+		const target = event.target;
+		if(target && target.classList.contains('tabheader__item')) {
             tabs.forEach((item, i) => {
                 if (target == item) {
                     hideTabContent();
                     showTabContent(i);
                 }
             });
-        }
+		}
     });
-    //Timer 
+    
+    // Timer
 
-    const deadline = "2021-02-13";
+    const deadline = '2020-05-11';
 
-    function getTimeRemaining (endtime) {
+    function getTimeRemaining(endtime) {
         const t = Date.parse(endtime) - Date.parse(new Date()),
-              days = Math.floor( (t / (1000 * 60 * 60 * 24)) ),
-              hours = Math.floor( (t / (1000 * 60 * 60) % 24) ),
-              minutes = Math.floor( (t / 1000 / 60) % 60),
-              seconds = Math.floor( (t / 1000) % 60);
+            days = Math.floor( (t/(1000*60*60*24)) ),
+            seconds = Math.floor( (t/1000) % 60 ),
+            minutes = Math.floor( (t/1000/60) % 60 ),
+            hours = Math.floor( (t/(1000*60*60) % 24) );
 
         return {
             'total': t,
@@ -56,44 +59,44 @@ window.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    function getZero(num) {
-        if (num >= 0 && num < 10) {
-            return `0${num}`;
+    function getZero(num){
+        if (num >= 0 && num < 10) { 
+            return '0' + num;
         } else {
             return num;
         }
     }
-    
-    function setClock(selector, endtime) {
-        const timer = document.querySelector(selector),
-              days = timer.querySelector('#days'),
-              hours = timer.querySelector('#hours'),
-              minutes = timer.querySelector('#minutes'),
-              seconds = timer.querySelector('#seconds'),
-              timeInterval = setInterval(updateClock, 1000);
 
-              updateClock();
+    function setClock(selector, endtime) {
+
+        const timer = document.querySelector(selector),
+            days = timer.querySelector("#days"),
+            hours = timer.querySelector('#hours'),
+            minutes = timer.querySelector('#minutes'),
+            seconds = timer.querySelector('#seconds'),
+            timeInterval = setInterval(updateClock, 1000);
+
+        updateClock();
 
         function updateClock() {
-             const t = getTimeRemaining(endtime);
+            const t = getTimeRemaining(endtime);
 
-                days.innerHTML =  getZero(t.days);
-                hours.innerHTML = getZero(t.hours);
-                minutes.innerHTML = getZero(t.minutes);
-                seconds.innerHTML = getZero(t.seconds);
+            days.innerHTML = getZero(t.days);
+            hours.innerHTML = getZero(t.hours);
+            minutes.innerHTML = getZero(t.minutes);
+            seconds.innerHTML = getZero(t.seconds);
 
             if (t.total <= 0) {
-            clearInterval(timeInterval);
+                clearInterval(timeInterval);
             }
         }
     }
-    
 
-setClock('.timer', deadline);
+    setClock('.timer', deadline);
 
-//Modal
+    // Modal
 
-const modalTrigger = document.querySelectorAll('[data-modal]'),
+    const modalTrigger = document.querySelectorAll('[data-modal]'),
         modal = document.querySelector('.modal');
 
     modalTrigger.forEach(btn => {
@@ -126,6 +129,7 @@ const modalTrigger = document.querySelectorAll('[data-modal]'),
     });
 
     const modalTimerId = setTimeout(openModal, 300000);
+    // Изменил значение, чтобы не отвлекало
 
     function showModalByScroll() {
         if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
@@ -135,7 +139,7 @@ const modalTrigger = document.querySelectorAll('[data-modal]'),
     }
     window.addEventListener('scroll', showModalByScroll);
 
-    //класи для карток
+    // Используем классы для создание карточек меню
 
     class MenuCard {
         constructor(src, alt, title, descr, price, parentSelector, ...classes) {
@@ -143,8 +147,8 @@ const modalTrigger = document.querySelectorAll('[data-modal]'),
             this.alt = alt;
             this.title = title;
             this.descr = descr;
-            this.classes = classes;
             this.price = price;
+            this.classes = classes;
             this.parent = document.querySelector(parentSelector);
             this.transfer = 27;
             this.changeToUAH(); 
@@ -156,10 +160,10 @@ const modalTrigger = document.querySelectorAll('[data-modal]'),
 
         render() {
             const element = document.createElement('div');
-            
+
             if (this.classes.length === 0) {
-                this.element = 'menu__item';
-                element.classList.add(this.element);
+                this.classes = "menu__item";
+                element.classList.add(this.classes);
             } else {
                 this.classes.forEach(className => element.classList.add(className));
             }
@@ -205,7 +209,7 @@ const modalTrigger = document.querySelectorAll('[data-modal]'),
         ".menu .container"
     ).render();
 
-    //Forms
+    // Forms
 
     const forms = document.querySelectorAll('form');
     const message = {
@@ -225,34 +229,32 @@ const modalTrigger = document.querySelectorAll('[data-modal]'),
             let statusMessage = document.createElement('img');
             statusMessage.src = message.loading;
             statusMessage.style.cssText = `
-            display: block;
-            margin: 0 auto;
+                display: block;
+                margin: 0 auto;
             `;
-            
             form.insertAdjacentElement('afterend', statusMessage);
         
-            const request = new XMLHttpRequest();
-            request.open('POST', 'server.php');
-            request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
             const formData = new FormData(form);
 
             const object = {};
             formData.forEach(function(value, key){
                 object[key] = value;
             });
-            const json = JSON.stringify(object);
 
-            request.send(json);
-
-            request.addEventListener('load', () => {
-                if (request.status === 200) {
-                    console.log(request.response);
-                    showThanksModal(message.success);
-                    form.reset();
-                    statusMessage.remove();
-                } else {
-                    showThanksModal(message.failure);
-                }
+            fetch('server.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(object)
+            }).then(data => {
+                console.log(data);
+                showThanksModal(message.success);
+                statusMessage.remove();
+            }).catch(() => {
+                showThanksModal(message.failure);
+            }).finally(() => {
+                form.reset();
             });
         });
     }
@@ -264,20 +266,19 @@ const modalTrigger = document.querySelectorAll('[data-modal]'),
         openModal();
 
         const thanksModal = document.createElement('div');
-              thanksModal.classList.add('modal__dialog');
-              thanksModal.innerHTML = `
-                <div class = "modal__content">
-                <div class = "modal__close" data-close>×</div>
-                <div class = "modal__titel">${message}</div>
-                </div>
-              `;
+        thanksModal.classList.add('modal__dialog');
+        thanksModal.innerHTML = `
+            <div class="modal__content">
+                <div class="modal__close" data-close>×</div>
+                <div class="modal__title">${message}</div>
+            </div>
+        `;
         document.querySelector('.modal').append(thanksModal);
         setTimeout(() => {
             thanksModal.remove();
             prevModalDialog.classList.add('show');
             prevModalDialog.classList.remove('hide');
             closeModal();
-
         }, 4000);
     }
 });
