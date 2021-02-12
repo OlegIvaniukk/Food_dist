@@ -16,12 +16,24 @@
     "url": "https://github.com/OlegIvaniukk/Food_dist/issues"
   },
   "homepage": "https://github.com/OlegIvaniukk/Food_dist#readme",
+  "browserslist": [
+    "> 1%"
+  ],
   "devDependencies": {
+    "@babel/cli": "^7.12.13",
+    "@babel/core": "^7.12.13",
+    "@babel/preset-env": "^7.12.13",
+    "babel-loader": "^8.2.2",
+    "core-js": "^3.8.3",
     "json-server": "^0.16.3",
     "webpack": "^5.20.2",
     "webpack-cli": "^4.5.0"
   },
   "dependencies": {
-    "mkdir": "0.0.2"
+    "@babel/polyfill": "^7.12.1",
+    "es6-promise": "^4.2.8",
+    "eslint": "^7.19.0",
+    "mkdir": "0.0.2",
+    "nodelist-foreach-polyfill": "^1.2.0"
   }
 }

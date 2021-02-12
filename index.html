@@ -18,7 +18,7 @@
             </nav>
         </div>
         <div class="header__right-block">
-            <button data-modal class="btn btn_white">Связаться с нами</button>
+            <button class="btn btn_white" data-modal>Связаться с нами</button>
         </div>
     </header>
     <div class="sidepanel">
@@ -47,13 +47,13 @@
                     <div class="tabcontent__descr">
                         Меню “Премиум” - мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!                                     
                     </div>
-                </div> -->
+                </div>
                 <div class="tabcontent">
                     <img src="img/tabs/post.jpg" alt="post">
                     <div class="tabcontent__descr">
                         Наше специальное “Постное меню” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения. Полная гармония с собой и природой в каждом элементе! Все будет Ом!                                     
                     </div>
-                </div> 
+                </div>
                 <div class="tabcontent">
                     <img src="img/tabs/vegy.jpg" alt="vegy">
                     <div class="tabcontent__descr">
@@ -86,7 +86,7 @@
                 </div>
             </div>
             <div class="offer__action">
-                <button data-modal class="btn btn_dark">Связаться с нами</button>
+                <button class="btn btn_dark" data-modal>Связаться с нами</button>
             </div>
         </div>
         <div class="container">
@@ -143,8 +143,8 @@
                     Ваш пол
                 </div>
                 <div class="calculating__choose" id="gender">
-                    <div id='female' class="calculating__choose-item calculating__choose-item_active">Женщина</div>
-                    <div id='male' class="calculating__choose-item">Мужчина</div>
+                    <div id="female" class="calculating__choose-item calculating__choose-item_active">Женщина</div>
+                    <div id="male" class="calculating__choose-item">Мужчина</div>
                 </div>
 
                 <div class="calculating__subtitle">
@@ -187,9 +187,10 @@
 
         <div class="menu__field">
             <div class="container">
-                
+
             </div>
         </div>
+    </div>
 
     <div class="order">
         <div class="container">
@@ -218,7 +219,7 @@
                 </div>
             </div>
             <div class="promotion__timer">
-                <div class="title">Залишилось до початку ДН:</div>
+                <div class="title">Осталось до конца акции:</div>
                 <div class="timer">
                     <div class="timer__block">
                         <span id="days">12</span>
@@ -263,7 +264,7 @@
         <div class="modal__dialog">
             <div class="modal__content">
                 <form action="#">
-                    <div data-close class="modal__close">&times;</div>
+                    <div class="modal__close" data-close>&times;</div>
                     <div class="modal__title">Мы свяжемся с вами как можно быстрее!</div>
                     <input required placeholder="Ваше имя" name="name" type="text" class="modal__input">
                     <input required placeholder="Ваш номер телефона" name="phone" type="phone" class="modal__input">
@@ -272,7 +273,6 @@
             </div>
         </div>
     </div>
+    <script src="js/bundle.js"></script>
 </body>
-<!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
-<script src="js/bundle.js"></script>
 </html>
